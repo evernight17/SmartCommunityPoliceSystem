@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="police.model.mapper.CarMapper">
+
+    <resultMap id="CarResultMap" type="police.model.pojo.Car">
+        <result column="car_id" property="carId"/>
+        <result column="owner_name" property="ownerName"/>
+    </resultMap>
+
+    <insert id="add">
+        insert into car(car_id,owner_name,model,color)
+        values(#{carId},#{ownerName},#{model},#{color})
+    </insert>
+
+    <update id="update">
+        update car
+        set
+            owner_name = #{ownerName},
+            model = #{model},
+            color = #{color}
+        where car_id = #{carId}
+    </update>
+
+    <delete id="deleteById">
+        delete from car where car_id = #{id}
+    </delete>
+
+    <select id="selectAll" resultMap="CarResultMap">
+        select * from car
+    </select>
+
+    <select id="selectById" resultMap="CarResultMap">
+        select * from car where car_id = #{id}
+    </select>
+</mapper>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="police.model.mapper.EventMapper">
+
+    <resultMap id="EventResultMap" type="police.model.pojo.Event">
+        <result column="event_id" property="eventId"/>
+    </resultMap>
+    <insert id="add">
+        insert into event (event_id,reporter,type,location,time,description,status)
+        values(#{eventId},#{reporter},#{type},#{location},#{time},#{description},#{status})
+    </insert>
+    <update id="update">
+        update event
+        set
+            reporter = #{reporter},
+            type = #{type},
+            location= #{location},
+            time= #{time},
+            description= #{description},
+            status= #{status}
+        where event_id = #{eventId}
+    </update>
+    <delete id="deleteById">
+        delete from event where event_id = #{id};
+    </delete>
+
+
+    <select id="selectAll" resultMap="EventResultMap">
+        select * from event
+    </select>
+
+    <select id="selectById" resultType="police.model.pojo.Event">
+        select * from event where event_id = #{id}
+    </select>
+
+
+</mapper>

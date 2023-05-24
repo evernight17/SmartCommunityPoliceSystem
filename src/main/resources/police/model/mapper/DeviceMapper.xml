@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="police.model.mapper.DeviceMapper">
+
+    <resultMap id="DeviceResultMap" type="police.model.pojo.Device">
+        <result column="device_id" property="deviceId"/>
+    </resultMap>
+    <insert id="add">
+        insert into device (device_id,type,location,status)
+        values(#{deviceId},#{type},#{location},#{status})
+    </insert>
+    <update id="update">
+        update device
+        set
+            type = #{type},
+            location = #{location},
+            status = #{status}
+        where device_id = #{deviceId}
+    </update>
+    <delete id="deleteById">
+        delete from device where device_id = #{id}
+    </delete>
+
+
+    <select id="selectAll" resultMap="DeviceResultMap">
+        select * from device
+    </select>
+
+    <select id="selectById" resultMap="DeviceResultMap">
+        select * from device where device_id = #{id}
+    </select>
+
+
+
+</mapper>
