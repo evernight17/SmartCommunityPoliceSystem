@@ -29,4 +29,7 @@
     <select id="selectById" resultType="police.model.pojo.User">
         select * from user where id = #{id}
     </select>
+    <select id="select" resultType="police.model.pojo.User">
+        select * from user where id = #{id} and password = #{password}
+    </select>
 </mapper>

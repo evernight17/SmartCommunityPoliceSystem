@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import police.model.mapper.CarMapper;
 import police.model.pojo.Car;
+import police.util.SqlSessionFactoryUtils;
 
 
 import java.io.IOException;
@@ -14,9 +15,7 @@ import java.util.List;
 public class CarTest {
     @Test
     public void testSelectAll() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -30,9 +29,7 @@ public class CarTest {
 
     @Test
     public void testSelectById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -48,9 +45,7 @@ public class CarTest {
     public void testAdd() throws IOException {
         Car car = new Car("¶õD0007","mike","SUV","black");
 
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -64,9 +59,7 @@ public class CarTest {
 
     @Test
     public void testDeleteById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -81,9 +74,7 @@ public class CarTest {
     @Test
     public void testUpdate() throws IOException {
         Car car = new Car("¶õD0007","mike","SUV","white");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 

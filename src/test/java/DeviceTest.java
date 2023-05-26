@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import police.model.mapper.DeviceMapper;
 import police.model.pojo.Device;
+import police.util.SqlSessionFactoryUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +14,7 @@ import java.util.List;
 public class DeviceTest {
     @Test
     public void testSelectAll() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -30,9 +29,7 @@ public class DeviceTest {
 
     @Test
     public void testSelectById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -47,9 +44,7 @@ public class DeviceTest {
     @Test
     public void testAdd() throws IOException {
         Device device = new Device("C004","摄像头","武汉市洪山区湖北工业大学图书馆","在线");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -63,9 +58,7 @@ public class DeviceTest {
 
     @Test
     public void testDeleteById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -79,9 +72,7 @@ public class DeviceTest {
     @Test
     public void testUpdate() throws IOException {
         Device device = new Device("C004","摄像头","武汉市洪山区湖北工业大学图书馆","离线");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 

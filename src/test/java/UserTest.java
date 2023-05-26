@@ -5,6 +5,7 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.junit.Test;
 import police.model.mapper.UserMapper;
 import police.model.pojo.User;
+import police.util.SqlSessionFactoryUtils;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -13,9 +14,7 @@ import java.util.List;
 public class UserTest {
     @Test
     public void testSelectAll() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -30,9 +29,7 @@ public class UserTest {
 
     @Test
     public void testSelectById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession();
 
@@ -48,9 +45,7 @@ public class UserTest {
     @Test
     public void testAdd() throws IOException {
         User user = new User("0005","jack","55555","555");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -62,9 +57,7 @@ public class UserTest {
 
     @Test
     public void testDeleteById() throws IOException {
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
@@ -77,14 +70,29 @@ public class UserTest {
     @Test
     public void testUpdate() throws IOException {
         User user = new User("0005","jack","55555","666");
-        String resource = "mybatis-config.xml";
-        InputStream inputStream = Resources.getResourceAsStream(resource);
-        SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
 
         SqlSession sqlSession = sqlSessionFactory.openSession(true);
 
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         userMapper.update(user);
+
+        sqlSession.close();
+    }
+
+    @Test
+    public void testSelect() throws IOException {
+        User user1 = new User();
+        user1.setId("0001");
+        user1.setPassword("111");
+
+        SqlSessionFactory sqlSessionFactory = SqlSessionFactoryUtils.getSqlSessionFactory();
+
+        SqlSession sqlSession = sqlSessionFactory.openSession();
+
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = userMapper.select(user1);
+        System.out.println(user);
 
         sqlSession.close();
     }
