@@ -1,2 +1,3 @@
+police\controller\servlet\EventServlet.class
 police\controller\servlet\LoginServlet.class
 police\controller\service\Login.class

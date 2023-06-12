@@ -45,7 +45,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter writer = resp.getWriter();
         if(user != null){
 //            writer.write("µÇÂ¼³É¹¦");
-            req.getRequestDispatcher("/html/map.html").forward(req,resp);
+            req.getRequestDispatcher("/html/index.html").forward(req,resp);
         }else{
             writer.write("µÇÂ½Ê§°Ü");
         }
